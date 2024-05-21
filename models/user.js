@@ -15,4 +15,7 @@ User.virtual('name').get(function(){
     return `${this.firstname} ${this.lastname}`
 })
 
+User.virtual('url').get(function(){
+    return `/user/${this._id}`
+})
 module.exports = mongoose.model('User', User);
