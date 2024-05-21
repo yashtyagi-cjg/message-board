@@ -33,6 +33,7 @@ app.use(session({
   store: sessionStore
 }))
 
+require('./config/passport')
 app.use(passport.session())
 
 
@@ -70,6 +71,6 @@ async function main(){
   console.log(`Connected to Mongo DB @ ${process.env.MONGODB_DBNAME}`)
 }
 
-main.catch((err)=>console.log(err));
+main().catch((err)=>console.log(err));
 
 module.exports = app;
