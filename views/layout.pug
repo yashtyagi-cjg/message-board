@@ -3,5 +3,22 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous")
+    script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous")
   body
-    block content
+    nav.navbar.bg-body-tertiary.navbar-expand-lg 
+      div.container-fluid.d-flex
+        a.navbar-brand(href='/') Message Board
+        div.collapse.navbar-collapse#navbarNav.d-flex.justify-content-end
+          //- button.btn.btn-secondary(type='button')
+          a.text-white.btn.btn-secondary(href='/new' role='button') New Post
+          if user=== undefined
+            ul.navbar-nav 
+              li.nav-item 
+                a.nav-link.active(href='/login') Login 
+              li.nav-item 
+                a.nav-link.active(href='/signup') Sign Up 
+          else 
+            a.nav-link.active(href='#')=user.name
+    div.container-fluid.m-2
+      block content
