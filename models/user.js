@@ -9,4 +9,4 @@ const User = new Schema({
     isMember: {type: Boolean}
 })
 
-module.exports = Schema.model('User', User);
+module.exports = mongoose.model('User', User);
