@@ -28,3 +28,16 @@ exports.post_newPost = asyncHandler(
         res.redirect('/')
     }
 )
+
+exports.get_deletePost = asyncHandler(
+    async(req, res, next)=>{
+        if(req.user.isAdmin){
+            await Post.findByIdAndDelete(req.params.id).exec().catch((err)=>{
+                console.log(`ERROR OCCURED while deleting ${req.params.id} by user ${req.user._id}`)
+            })
+
+            console.log('Post Deleted')
+        }
+        res.redirect('/')
+    }
+)

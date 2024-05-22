@@ -44,6 +44,18 @@ exports.get_signup = asyncHandler(
 )
 
 exports.post_signup = [
+    
+    body('username')
+    .trim()
+    .isLength({min: 5}).withMessage('Username is less than 5 characters')
+
+    ,
+    body('cpassword', 'Passwords do not match')
+    .custom((cpassword, {req})=>{
+        if(cpassword !== req.body.password){
+            throw new Error('Passwords do not match')
+        }
+    }),
     asyncHandler(
         async(req, res, next)=>{
             const errors = validationResult(req);
