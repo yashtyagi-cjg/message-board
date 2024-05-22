@@ -6,3 +6,13 @@ body {
 a {
   color: #00B7FF;
 }
+
+body {
+  /* margin: 0; */
+  padding: 2%;
+}
+
+
+.full-height-container {
+  height: calc(100vh - 20vh); /* Adjust 56px based on your navbar height */
+}
