@@ -8,7 +8,7 @@ block content
 
   else 
     for post in posts
-      div.card 
+      div.card.mb-4
         div.card-body.lead=post.message 
         if isAdmin !== undefined && isAdmin
           div.card-footer.d-flex.justify-content-between
