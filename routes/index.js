@@ -5,6 +5,14 @@ const Post = require('./../controllers/post');
 const Auth = require('./../controllers/authentication')
 const passport = require('passport')
 
+
+function ensureAuthentication(req, res, next){
+  if(req.isAuthenticated()){
+    return next();
+  }
+
+  res.redirect('/');
+}
 /* GET home page. */
 router.get('/', Homepage.get_homepage);
 
@@ -21,6 +29,7 @@ router.post('/login', passport.authenticate('local', {
   failureRedirect: '/login'
 }));
 
+router.get('/delete/:id', ensureAuthentication, Post.get_deletePost);
 router.get('/logout', Auth.get_logout);
 
 router.get('/signup', Auth.get_signup);
