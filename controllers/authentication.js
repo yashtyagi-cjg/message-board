@@ -4,7 +4,7 @@ const {generatePassword, validatePassword} = require('./../utils/passwordUtils')
 const User = require('./../models/user')
 
 exports.get_login = asyncHandler(
-    (req, res, next)=>{
+    async(req, res, next)=>{
         res.render("login", 
             {
                 title: "Log In",
@@ -21,7 +21,7 @@ exports.post_login = asyncHandler(
 )
 
 exports.get_logout = asyncHandler(
-    (req,res,next)=>{
+    async(req,res,next)=>{
         req.logout(function(err){
             if(err){
                 return next(err);
@@ -45,7 +45,7 @@ exports.get_signup = asyncHandler(
 
 exports.post_signup = [
     asyncHandler(
-        (req, res, next)=>{
+        async(req, res, next)=>{
             const errors = validationResult(req);
 
             

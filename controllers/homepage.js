@@ -3,10 +3,13 @@ const asyncHandler = require('express-async-handler')
 
 
 exports.get_homepage = asyncHandler(
-    (req, res, next)=>{
+    async(req, res, next)=>{
+        console.log(req.user)
         res.render("homepage",
             {
-                title: "Messages"
+                title: "Messages",
+                messages: undefined,
+                user: req.user,
             }
         )
     }
