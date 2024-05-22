@@ -1,10 +1,16 @@
 const asyncHandler = require('express-async-handler')
-const {body, resultValidation} = require('express-validator') 
-
+const {body, validationResult} = require('express-validator') 
+const {generatePassword, validatePassword} = require('./../utils/passwordUtils')
+const User = require('./../models/user')
 
 exports.get_login = asyncHandler(
     (req, res, next)=>{
-        res.send('GET_LOGIN NOT IMPLEMENTED')
+        res.render("login", 
+            {
+                title: "Log In",
+                authPage: true,
+            }
+        )
     }
 )
 
@@ -14,16 +20,60 @@ exports.post_login = asyncHandler(
     }
 )
 
+exports.get_logout = asyncHandler(
+    (req,res,next)=>{
+        req.logout(function(err){
+            if(err){
+                return next(err);
+            }
+        })
 
-
-exports.get_signup = asyncHandler(
-    (req, res, next)=>{
-        res.send('GET SIGNUP NOT IMPLEMENTED');
+        res.redirect('/')
     }
 )
 
-exports.post_signup = asyncHandler(
+exports.get_signup = asyncHandler( 
     (req, res, next)=>{
-        res.send('POST SIGN UP NOT IMPLEMENTED');
+        res.render("signup", 
+            {
+                title: "Sign Up",
+                authPage: true,
+            }
+        )
     }
 )
+
+exports.post_signup = [
+    asyncHandler(
+        (req, res, next)=>{
+            const errors = validationResult(req);
+
+            
+            if(!errors.isEmpty()){
+                res.render("signup", 
+                {
+                    title: "Sign Up",
+                    authPage: true,
+                    errors: errors.array(),
+                })
+            }else{
+                const passSet = generatePassword(req.body.password);
+                const newUser= new User({
+                    username: req.body.username,
+                    firstname: req.body.firstname,
+                    lastname: req.body.lastname,
+                    hash: passSet.hash,
+                    salt: passSet.salt,
+                    isAdmin: (req.body.AdminRadio === 'yes'?true:false),
+                    isMember: false,
+                })
+
+                newUser.save();
+
+                console.log(newUser);
+                res.redirect('/login')
+            }
+
+            
+        }
+)]
