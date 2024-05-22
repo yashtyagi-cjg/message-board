@@ -21,8 +21,23 @@ html
               li.nav-item 
                 a.nav-link.active(href='/signup') Sign Up 
           else if user !== undefined
-            a.text-white.btn.btn-secondary(href='/new' role='button') New Post
+            button.btn.btn-secondary(type='button' data-bs-toggle='modal' data-bs-target='#postModal') New Post
             button.btn.btn-secondary.ms-2.text-center
               a.nav-link.active(href='/logout') Logout
     div.container-fluid.m-2
       block content
+
+
+    div(class='modal fade' id='postModal' data-bs-backdrop='static' data-bs-keyboard='false')
+      div.modal-dialog
+        div.modal-content 
+          div.modal-header 
+            h1.modal-title.fs-5#staticPostModal New Post 
+            button.btn-close(type='button' data-bs-dismiss='modal')
+          div.modal-body 
+            form(method='POST' action='/new')
+              div.mb-3.form-floating
+                textarea.form-control(name='message' id='message' type='textarea') 
+                label(for='message') Message 
+              button.btn.btn-secondary(type='submit') Submit
+                
