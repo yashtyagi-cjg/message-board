@@ -2,7 +2,7 @@ const crypto = require('crypto')
 
 function generatePassword(password){
     const salt = crypto.randomBytes(32).toString('hex');
-    const hash = crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512')
+    const hash = crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('hex');
 
     return {
         salt: salt,
@@ -11,7 +11,8 @@ function generatePassword(password){
 }
 
 function validatePassword(currPassword, storedHash, storedSalt){
-    const currHash = crypto.pbkdf2Sync(currPassword, storedSalt, 10000, 64, 'sha512');
+    console.log(currPassword)
+    const currHash = crypto.pbkdf2Sync(currPassword, storedSalt, 10000, 64, 'sha512').toString('hex');
 
     return currHash === storedHash
 }
