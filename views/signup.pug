@@ -1,0 +1,40 @@
+extends layout 
+block content 
+
+    .d-flex.justify-content-center.align-items-center.full-height-container
+        .card.p-4.shadow-sm(style='width: 20rem;')
+            form(method='POST')
+                h1.display-9.mb-4.mt-2.text-center= title
+                div.mb-3.d-flex 
+                    div.mb-2.form-floating 
+                        input.form-control#firstname(type='text' name='firstname' placeholder='Hahahaha')
+                        label(for='firstname') First Name
+                    div.mb-2.form-floating 
+                        input.form-control#lastname(type='text' name='lastname' placeholder='Hahahaha')
+                        label(for='lastname') Last Name
+
+                p.lead Are you an Admin?
+                div.form-check 
+                    input.form-check-input(type='radio' name='AdminRadio' value='true' id='yesAdmin')
+                    label.form-check-label(for='yesAdmin') True 
+
+                div.form-check.mb-4 
+                    input.form-check-input(type='radio' name='AdminRadio' value='false' id='noAdmin')
+                    label.form-check-label(for='noAdmin') False   
+                div.mb-3.form-floating 
+                    input.form-control#username(type='text' name='username' placeholder='Hahahaha')
+                    label(for='username') Username
+                
+                div.mb-3.form-floating 
+                    input.form-control#password(type='password' name='password' placeholder='shhhhhhh!')
+                    label(for='password') Password
+                
+                div.mb-3.form-floating 
+                    input.form-control#cpassword(type='password' name='cpassword' placeholder='shhhhhhh!')
+                    label(for='cpassword') Confirm Password
+                
+                button.btn.btn-primary.w-100(type='submit') Submit
+    if errors !== undefined
+        ul
+        each error in errors 
+            li error.msg

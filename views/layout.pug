@@ -9,16 +9,20 @@ html
     nav.navbar.bg-body-tertiary.navbar-expand-lg 
       div.container-fluid.d-flex
         a.navbar-brand(href='/') Message Board
+        if user!=undefined 
+          a.nav-link.active.ms-2.badge.bg-primary(href='#')=user.username
         div.collapse.navbar-collapse#navbarNav.d-flex.justify-content-end
           //- button.btn.btn-secondary(type='button')
-          a.text-white.btn.btn-secondary(href='/new' role='button') New Post
-          if user=== undefined
+          
+          if user === undefined && !authPage
             ul.navbar-nav 
               li.nav-item 
                 a.nav-link.active(href='/login') Login 
               li.nav-item 
                 a.nav-link.active(href='/signup') Sign Up 
-          else 
-            a.nav-link.active(href='#')=user.name
+          else if user !== undefined
+            a.text-white.btn.btn-secondary(href='/new' role='button') New Post
+            button.btn.btn-secondary.ms-2.text-center
+              a.nav-link.active(href='/logout') Logout
     div.container-fluid.m-2
       block content

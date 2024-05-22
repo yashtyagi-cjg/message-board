@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1.display-6= title
+  
+  if messages===undefined
+    p.lead No posts to display 
+
+  else 
+    ul 
+      for post in posts
+        li=post.msg

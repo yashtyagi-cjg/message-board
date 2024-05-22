@@ -1,0 +1,16 @@
+extends layout 
+block content
+
+  .d-flex.justify-content-center.align-items-center.full-height-container
+    .card.p-4.shadow-sm(style='width: 20rem;')
+      form(method='POST')
+        h1.display-9.mb-4.mt-2.text-center= title
+        div.mb-3.form-floating 
+          input.form-control#username(type='text' name='username' placeholder='Hahahaha')
+          label(for='username') Username
+        
+        div.mb-3.form-floating 
+          input.form-control#password(type='password' name='password' placeholder='shhhhhhh!')
+          label(for='password') Password
+        
+        button.btn.btn-primary.w-100(type='submit') Submit
