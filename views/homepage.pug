@@ -3,10 +3,15 @@ extends layout
 block content
   h1.display-6= title
   
-  if messages===undefined
+  if posts===undefined
     p.lead No posts to display 
 
   else 
-    ul 
-      for post in posts
-        li=post.msg
+    for post in posts
+      div.card 
+        div.card-body.lead=post.message 
+        if isAdmin !== undefined && isAdmin
+          div.card-footer.d-flex.justify-content-between
+            span=`Author: ${user.username}`
+            a.active.ms-2.badge.bg-secondary(href=`/delete/${post._id}`) Delete
+        
