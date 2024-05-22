@@ -11,7 +11,6 @@ function generatePassword(password){
 }
 
 function validatePassword(currPassword, storedHash, storedSalt){
-    console.log(currPassword)
     const currHash = crypto.pbkdf2Sync(currPassword, storedSalt, 10000, 64, 'sha512').toString('hex');
 
     return currHash === storedHash
